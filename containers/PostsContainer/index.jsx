@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import axiosInstance from "../../api/axiosInstance";
 import Post from "../../components/Post";
 import { FlatList, StyleSheet, View } from "react-native";
 import { fetchPosts } from "../../api/postsService";
 
-const PostsPage = () => {
+const PostsContainer = () => {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     fetchPosts().then((res) => setPosts(res));
@@ -14,7 +13,8 @@ const PostsPage = () => {
     <View style={styles.postsContainer}>
       <FlatList
         data={posts}
-        renderItem={({ item }) => <Post key={item.id} post={item} />}
+        renderItem={({ item }) => <Post post={item} />}
+        keyExtractor={(item) => `list-item-${item.id}`}
       />
     </View>
   );
@@ -27,4 +27,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PostsPage;
+export default PostsContainer;

@@ -4,5 +4,5 @@ export const fetchPosts = async () => {
   return axiosInstance({
     method: "get",
     url: "/posts",
-  }).then((res) => res);
+  })
 };
